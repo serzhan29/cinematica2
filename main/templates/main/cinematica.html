@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'stylefor.css' %}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <title>Главная страница</title>
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="navbar-container">
+            <div class="logo-container">
+                <h1 class="logo">Cinematica</h1>
+            </div>
+
+                <div class="menu-container">
+                    <ul class="menu-list">
+                        {% for category in categories %}
+                            <li class="menu-list-item"><a href="serial">{{ category.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            <div class="profile-container">
+                <div class="toggle">
+                    <i class="fas fa-moon toggle-icon"></i>
+                    <i class="fas fa-sun toggle-icon"></i>
+                    <div class="toggle-ball"></div>
+                </div>
+            </div>
+        </div>
+    <div class="container">
+        <div class="content-container">
+            <div class="featured-content"
+
+                style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('{{ movie.poster.url }}');">
+                <img class="featured-title" src="боец.jpg" alt="">
+                <p class="featured-desc"></p>
+                <button class="featured-button">СМОТРЕТЬ</button>
+
+            </div>
+            <div class="movie-list-container">
+                <h1 class="movie-list-title">Популярное</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="bladerun.jpg" alt="">
+                            <span class="movie-list-item-title">Бегущий по лезвию 2049</span>
+                            <p class="movie-list-item-desc">Продолжение культового фильма «Бегущий по лезвию», действие которого разворачивается через несколько десятилетий.</p>
+                            <button class="movie-list-item-button">Смотреть</button>
+                        </div>
+
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+            <div class="movie-list-container">
+                <h1 class="movie-list-title">Новинки</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        {% for all in all %}
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="{{ all.poster.url }}" alt="">
+                            <span class="movie-list-item-title">{{ all.title }}</span>
+                            <p class="movie-list-item-desc">{{ all.tagline }}</p>
+                            <button class="movie-list-item-button" onclick="window.location.href='/{{ all.url }}/'">Смотреть</button>
+                        </div>
+                        {% endfor %}
+                        <i class="fas fa-chevron-right arrow"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="featured-content"
+
+                style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('blade2.jpg');">
+                <img class="featured-title" src="blade.jpg" alt="">
+                <p class="featured-desc">«Бегущий по лезвию» — художественный фильм, снятый английским режиссёром Ридли Скоттом в марте — июле 1981 года по мотивам научно-фантастического романа Филипа Дика.</p>
+                <button class="featured-button">Смотреть</button>
+            </div>
+            <div class="movie-list-container">
+                <h1 class="movie-list-title">Мультфильмы</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        {% for cartoon in cartoon_list %}
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="{{ cartoon.poster.url }}" alt="">
+                            <span class="movie-list-item-title">{{ cartoon.title }}</span>
+                            <p class="movie-list-item-desc">{{ cartoon.tagline }}</p>
+                            <button class="movie-list-item-button" onclick="window.location.href='/{{ cartoon.url }}/'">Смотреть</button>
+                        </div>
+                        {% endfor %}
+
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+            <div class="movie-list-container">
+                <h1 class="movie-list-title">Сериалы</h1>
+                <div class="movie-list-wrapper">
+                    <div class="movie-list">
+                        {% for serial in serial_list %}
+                        <div class="movie-list-item">
+                            <img class="movie-list-item-img" src="{{ serial.poster.url }}" alt="">
+                            <span class="movie-list-item-title">{{ serial.title }}</span>
+                            <p class="movie-list-item-desc">{{ serial.title }}</p>
+                            <button class="movie-list-item-button" onclick="window.location.href='/{{ serial.url }}/'">Смотреть</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <i class="fas fa-chevron-right arrow"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'app.js' %}"></script>
+  </div>
+ </div>
+</body>
+</html>

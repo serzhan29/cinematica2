@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+		body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+header ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+header li {
+  margin-left: 20px;
+}
+
+header a {
+  color: #fff;
+  text-decoration: none;
+}
+
+header a:hover {
+  text-decoration: underline;
+}
+
+.filter {
+  width: 200px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.filter h2 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.filter form {
+  margin-top: 10px;
+}
+
+.filter
+
+	</style>
+
+<body>
+  <header>
+    <h1>CINEMATICA</h1>
+    <ul>
+      <li><a href="#">Вход</a></li>
+      <li><a href="#">Регистрация</a></li>
+      <li><a href="#">История просмотров</a></li>
+    </ul>
+  </header>
+
+  <div class="filter">
+    <h2>Фильтры</h2>
+    <form>
+      <label for="category">Категория:</label>
+      <select id="category" name="category">
+        <option value="">Выбрать категорию</option>
+        <option value="movie">Фильмы</option>
+        <option value="tv">Сериалы</option>
+      </select>
+
+      <label for="year">Год:</label>
+      <select id="year" name="year">
+        <option value="">Выбрать год</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+      </select>
+
+      <label for="genre">Жанр:</label>
+      <select id="genre" name="genre">
+        <option value="">Выбрать жанр</option>
+        <option value="action">Боевик</option>
+        <option value="comedy">Комедия</option>
+        <option value="drama">Драма</option>
+        <option value="horror">Ужасы</option>
+        <option value="sci-fi">Научная фантастика</option>
+      </select>
+
+      <button type="submit">Применить фильтры</button>
+    </form>
+  </div>
+
+  <main>
+
+{% for category in categories %}
+    <h2>{{ category.name }}</h2>
+    <div class="movies">
+        {% if category.id == 1 %}
+            {% for movie in movie_list %}
+                <div class="movie">{{ movie.title }}</div>
+            {% endfor %}
+        {% elif category.id == 2 %}
+            {% for movie in cartoon_list %}
+                <div class="movie">{{ movie.title }}</div>
+            {% endfor %}
+        {% elif category.id == 3 %}
+            {% for movie in series_list %}
+                <div class="movie">{{ movie.title }}</div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endfor %}
+
+
+  </main>
+</body>
