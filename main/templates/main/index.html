@@ -1,138 +1,120 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'stylefor.css' %}">
+    <script src="{% static 'app.js' %}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <title>Поиск фильмов</title>
     <style>
-		body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-}
+    body {
+        background-color: #808080;
+        color: #fff;
+    }
+        .search-form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-header {
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+        .search-input {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-header h1 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
+        .search-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-header ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-}
+        .search-button:hover {
+            background-color: #45a049;
+        }
 
-header li {
-  margin-left: 20px;
-}
 
-header a {
-  color: #fff;
-  text-decoration: none;
-}
+        .movie-list-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-header a:hover {
-  text-decoration: underline;
-}
+        .movie-list-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
-.filter {
-  width: 200px;
-  padding: 10px;
-  background-color: #f2f2f2;
-  margin: 10px;
-  border-radius: 5px;
-}
+        .movie-list-item-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
 
-.filter h2 {
-  margin-top: 0;
-  font-size: 20px;
-}
+        .movie-list-item-desc {
+            font-size: 14px;
+            margin-top: 5px;
+        }
 
-.filter form {
-  margin-top: 10px;
-}
+        .movie-list-item-button {
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-.filter
-
-	</style>
-
+        .movie-list-item-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
 <body>
-  <header>
-    <h1>CINEMATICA</h1>
-    <ul>
-      <li><a href="#">Вход</a></li>
-      <li><a href="#">Регистрация</a></li>
-      <li><a href="#">История просмотров</a></li>
-    </ul>
-  </header>
+        <div class="navbar">
+        <div class="navbar-container">
+            <div class="logo-container">
+                <a href="/">
+                  <h1 class="logo">Cinematica</h1>
+                </a>
+            </div>
+        </div>
+        </div>
 
-  <div class="filter">
-    <h2>Фильтры</h2>
-    <form>
-      <label for="category">Категория:</label>
-      <select id="category" name="category">
-        <option value="">Выбрать категорию</option>
-        <option value="movie">Фильмы</option>
-        <option value="tv">Сериалы</option>
-      </select>
-
-      <label for="year">Год:</label>
-      <select id="year" name="year">
-        <option value="">Выбрать год</option>
-        <option value="2022">2022</option>
-        <option value="2021">2021</option>
-        <option value="2020">2020</option>
-        <option value="2019">2019</option>
-      </select>
-
-      <label for="genre">Жанр:</label>
-      <select id="genre" name="genre">
-        <option value="">Выбрать жанр</option>
-        <option value="action">Боевик</option>
-        <option value="comedy">Комедия</option>
-        <option value="drama">Драма</option>
-        <option value="horror">Ужасы</option>
-        <option value="sci-fi">Научная фантастика</option>
-      </select>
-
-      <button type="submit">Применить фильтры</button>
-    </form>
-  </div>
-
-  <main>
-
-{% for category in categories %}
-    <h2>{{ category.name }}</h2>
-    <div class="movies">
-        {% if category.id == 1 %}
-            {% for movie in movie_list %}
-                <div class="movie">{{ movie.title }}</div>
-            {% endfor %}
-        {% elif category.id == 2 %}
-            {% for movie in cartoon_list %}
-                <div class="movie">{{ movie.title }}</div>
-            {% endfor %}
-        {% elif category.id == 3 %}
-            {% for movie in series_list %}
-                <div class="movie">{{ movie.title }}</div>
-            {% endfor %}
-        {% endif %}
+    <div class="search-form">
+        <form action="{% url 'search' %}" method="get">
+            <input class="search-input" type="search" name="q" placeholder="Поиск фильмов">
+            <button class="search-button" type="submit">Найти</button>
+        </form>
     </div>
-{% endfor %}
+    <br>
+    <div class="movie-list">
+        <div class="movie-list-container">
+            <div class="movie-list-wrapper">
+                {% for movie in movie_list %}
+                <div class="movie-list-item">
+                    <img class="movie-list-item-img" src="{{ movie.poster.url }}" alt="" width="200" height="300">
+                    <span class="movie-list-item-title">{{ movie.title }}</span>
+                    <p class="movie-list-item-desc">{{ movie.tagline }}</p>
+                    <button class="movie-list-item-button" onclick="window.location.href='/{{ movie.url }}/'">Смотреть</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
-
-  </main>
 </body>
+</html>
