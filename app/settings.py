@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-r_sjp*cynmmn78a_33$i6mn@+qt7wpm8+=&v2-g3b)=9)l5k59
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
+    'djoser',
+    'rest_framework',
+
     'main',
     'corsheaders',
 ]
@@ -51,6 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -86,6 +91,12 @@ DATABASES = {
     }
 }
 
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

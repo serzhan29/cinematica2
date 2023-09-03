@@ -51,11 +51,3 @@ class Search(ListView):
         context["q"] = self.request.GET.get("q")
         return context
 
-
-class Index(ListView):
-    def get(self, request):
-        all = Movie.objects.all()
-        return render(request, 'main/index.html', {
-                                                        "all": all,
-                                                        }
-                      )
